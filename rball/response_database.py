@@ -136,7 +136,7 @@ class ResponseDatabase:
 
         bbc, tri = self._triangulation.containing_simplex_and_bcc(theta, phi)
 
-        matrix = _linear_interpolation(bbc, self._matrices[tri])
+        matrix = _linear_interpolation(bbc[0], self._matrices[tri[0]])
 
         # update teh 3ML matrix
 
@@ -182,7 +182,7 @@ class ResponseDatabase:
     def plot_verticies_ipv(
         self, selected_location: Optional[Iterable[float]] = None
     ):
-        fig = ipv.figure()
+        fig = ipv.figure(width=800, height=600)
 
         points = self._triangulation.points
         segs = self._triangulation.identify_segments()
@@ -213,10 +213,10 @@ class ResponseDatabase:
 
             theta, phi = selected_location
 
-            this_point = lonlat2xyz(theta, phi)
+            this_point = lonlat2xyz(phi, theta)
 
             bbc, tri = self._triangulation.containing_simplex_and_bcc(
-                theta, phi
+                phi, theta
             )
 
             ipv.scatter(
@@ -230,15 +230,25 @@ class ResponseDatabase:
             ipv.pylab.scatter(*this_point, color="limegreen", marker="sphere")
 
         ipv.xyzlim(1.1)
+        ipv.pylab.style.box_off()
+
         ipv.show()
 
 
 #        return fig
 
 
-@nb.njit(fastmath=True)
+# @nb.njit(fastmath=True)
 def _linear_interpolation(
     weights: np.ndarray, super_matrix: np.ndarray
 ) -> np.ndarray:
 
-    return np.dot(weights, super_matrix)
+    shape = super_matrix[0].shape
+
+    out = np.zeros((shape[0], shape[1]))
+
+    for i in range(3):
+
+        out += weights[i] * super_matrix[i]
+
+    return out

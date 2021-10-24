@@ -1,3 +1,4 @@
+from os import replace
 from typing import Optional, Iterable, Tuple
 import numpy as np
 import numba as nb
@@ -92,6 +93,8 @@ class ResponseDatabase:
             monte_carlo_energies=self._monte_carlo_energies,
         )
 
+        self.interpolate_to_position(0, 0)
+
     @property
     def current_response(self) -> InstrumentResponse:
 
@@ -155,6 +158,13 @@ class ResponseDatabase:
         # update teh 3ML matrix
 
         self._current_matrix.replace_matrix(matrix)
+
+        self._current_ra: float = ra
+        self._current_dec: float = dec
+
+    @property
+    def current_sky_position(self) -> Tuple[float]:
+        return self._current_ra, self._current_dec
 
     def plot_verticies(self) -> plt.Figure:
 

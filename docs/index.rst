@@ -5,5 +5,7 @@ Welcome to rball's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   api/API.rst
+    notebooks/quickstart.ipynb
+    notebooks/localization.ipynb
+    api/API.rst
 	     

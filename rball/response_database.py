@@ -1,4 +1,4 @@
-from typing import Optional, Iterable
+from typing import Optional, Iterable, Tuple
 import numpy as np
 import numba as nb
 import stripy
@@ -40,6 +40,7 @@ class ResponseDatabase:
         :type ebounds: np.ndarray
         :param monte_carlo_energies:
         :type monte_carlo_energies: np.ndarray
+        ::
         :returns:
 
         """
@@ -51,6 +52,10 @@ class ResponseDatabase:
         self._monte_carlo_energies: np.ndarray = monte_carlo_energies
 
         self._n_grid_points: int = self._matrices.shape[0]
+
+        self._matrix_shape = self._matrices.shape[1:]
+
+        self._occulted_matrix = np.zeros(self._matrix_shape)
 
         if theta.shape[0] != self._n_grid_points:
 
@@ -84,39 +89,10 @@ class ResponseDatabase:
             monte_carlo_energies=self._monte_carlo_energies,
         )
 
-    @classmethod
-    def from_hdf5(cls, file_name: str, use_high_gain: bool = False):
+    @property
+    def current_response(self) -> InstrumentResponse:
 
-        with h5py.File(file_name, "r") as f:
-
-            # this part is a little polar specific at the moment
-            # will remove and generalize
-
-            if use_high_gain:
-
-                ext = "hg"
-
-            else:
-
-                ext = "lg"
-
-            list_of_matrices = f[f"matrix_{ext}"][()]
-
-            theta = f["theta"][()]
-
-            phi = f["phi"][()]
-
-            ebounds = f["ebounds"][()]
-
-            mc_energies = f["mc_energies"][()]
-
-            return cls(
-                list_of_matrices=list_of_matrices,
-                theta=theta,
-                phi=phi,
-                ebounds=ebounds,
-                monte_carlo_energies=mc_energies,
-            )
+        return self._current_matrix
 
     @property
     def grid_points(self) -> np.ndarray:
@@ -129,7 +105,28 @@ class ResponseDatabase:
             lons=self._phi, lats=self._theta, permute=True, tree=True
         )
 
-    def interpolate_to_position(self, theta: float, phi: float) -> None:
+    def _transform_to_instrument_coordinates(
+        self, ra: float, dec: float
+    ) -> Tuple[float]:
+        """
+        This is a stub function that should take and RA/Dec pair (in degrees)
+        and convert it into the coordinate system of the intruments which may
+        or may not be in motion.
+
+        The function should return a spherical theta, phi tuple in radian
+
+        :param ra:
+        :param dec:
+
+        :returns: (theta, phi) in radian
+
+        """
+
+        return np.deg2rad([dec, ra])
+
+    def interpolate_to_position(self, ra: float, dec: float) -> None:
+
+        theta, phi = self._transform_to_instrument_coordinates(ra, dec)
 
         # obtain the surrounding matricies and their normalized
         # barycenters
@@ -182,7 +179,23 @@ class ResponseDatabase:
     def plot_verticies_ipv(
         self, selected_location: Optional[Iterable[float]] = None
     ):
+        """
+
+        :param selected_location: ra, dec tuple in degree
+
+        """
+
+        background_color = "#2E0E49"
+        grid_color = "#FDFF8D"
+        grid_color2 = "#FDFEAE"
+        selected_color = "#FF6563"
+        point_color = "#63FFA3"
+
         fig = ipv.figure(width=800, height=600)
+        ipv.pylab.style.box_off()
+        # ipv.pylab.style.axes_off()
+        ipv.pylab.style.set_style_dark()
+        ipv.pylab.style.background_color(background_color)
 
         points = self._triangulation.points
         segs = self._triangulation.identify_segments()
@@ -191,7 +204,7 @@ class ResponseDatabase:
             points[:, 0],
             points[:, 1],
             points[:, 2],
-            color="k",
+            color=grid_color,
             alpha=1,
             size=1,
             color_selected="red",
@@ -205,13 +218,15 @@ class ResponseDatabase:
                 [points[s1, 0], points[s2, 0]],
                 [points[s1, 1], points[s2, 1]],
                 [points[s1, 2], points[s2, 2]],
-                color="grey",
+                color=grid_color2,
                 alpha=0.5,
             )
 
         if selected_location is not None:
 
-            theta, phi = selected_location
+            theta, phi = self._transform_to_instrument_coordinates(
+                *selected_location
+            )
 
             this_point = lonlat2xyz(phi, theta)
 
@@ -223,11 +238,11 @@ class ResponseDatabase:
                 points[tri, 0],
                 points[tri, 1],
                 points[tri, 2],
-                color="red",
+                color=selected_color,
                 marker="sphere",
             )
 
-            ipv.pylab.scatter(*this_point, color="limegreen", marker="sphere")
+            ipv.pylab.scatter(*this_point, color=point_color, marker="sphere")
 
         ipv.xyzlim(1.1)
         ipv.pylab.style.box_off()

@@ -7,6 +7,7 @@ from stripy.spherical import lonlat2xyz
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 import ipyvolume as ipv
+import pythreejs
 
 from threeML.utils.OGIP.response import InstrumentResponse
 
@@ -83,6 +84,8 @@ class ResponseDatabase:
 
         # now intitialize the current matrix
 
+        log.debug(f" setting the current matrix to the first data point")
+
         self._current_matrix: InstrumentResponse = InstrumentResponse(
             matrix=list_of_matrices[0],
             ebounds=self._ebounds,
@@ -99,7 +102,19 @@ class ResponseDatabase:
 
         return self._triangulation.points
 
+    @property
+    def n_grid_points(self) -> int:
+        """
+        the number of grid points in
+        the response database
+        :returns:
+
+        """
+        return self._n_grid_points
+
     def _generate_triangulation(self) -> None:
+
+        log.debug("generating the triangulation")
 
         self._triangulation = stripy.spherical.sTriangulation(
             lons=self._phi, lats=self._theta, permute=True, tree=True
@@ -132,6 +147,8 @@ class ResponseDatabase:
         # barycenters
 
         bbc, tri = self._triangulation.containing_simplex_and_bcc(theta, phi)
+
+        log.debug(f"weights: {bbc[0]}, indices: {tri[0]}")
 
         matrix = _linear_interpolation(bbc[0], self._matrices[tri[0]])
 
@@ -246,6 +263,12 @@ class ResponseDatabase:
 
         ipv.xyzlim(1.1)
         ipv.pylab.style.box_off()
+
+        fig.camera.up = [0, 0, 1]
+        control = pythreejs.OrbitControls(controlling=fig.camera)
+        fig.controls = control
+        control.autoRotate = True
+        fig.render_continuous = True
 
         ipv.show()
 

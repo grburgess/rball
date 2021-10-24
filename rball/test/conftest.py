@@ -6,7 +6,7 @@ from pathlib import Path
 import h5py
 
 import pytest
-from rball.utils.package_utils import get_path_of_data_file
+from rball.utils.package_data import get_path_of_data_file
 from rball.response_database import ResponseDatabase
 
 
@@ -19,7 +19,7 @@ def rsp_database():
 
         # this is for the temporary
 
-        list_of_matrices = f[f"matrix_{ext}"][()]
+        list_of_matrices = f["matrix"][()]
 
         theta = f["theta"][()]
 

@@ -1,0 +1,45 @@
+rball.utils package
+===================
+
+Submodules
+----------
+
+rball.utils.file\_utils module
+------------------------------
+
+.. automodule:: rball.utils.file_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+rball.utils.geometry module
+---------------------------
+
+.. automodule:: rball.utils.geometry
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+rball.utils.logging module
+--------------------------
+
+.. automodule:: rball.utils.logging
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+rball.utils.package\_data module
+--------------------------------
+
+.. automodule:: rball.utils.package_data
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: rball.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:

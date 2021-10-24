@@ -1,0 +1,418 @@
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rball.response_database &mdash; rball  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <link rel="stylesheet" href="../../_static/pygments/default.css" type="text/css" id="pygments-style">
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css">
+   
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> rball
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">rball</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+  <!--
+  <div class="admonition note">
+    <p><a href="https://github.com/lukelbd">ProPlot author here</a>: Due to my day job as a graduate student, certain <a href="https://github.com/lukelbd/proplot/pulls?q=is%3Aopen+is%3Apr">feature additions</a> may be delayed to the summer of 2020. In the meantime, if you are interested in contributing to ProPlot, please see the <a href="https://proplot.readthedocs.io/en/latest/contributions.html">contribution guide</a>. Any amount of help is welcome!
+    </p>
+  </div>
+  -->
+  <li id="lightdark-li">
+    <label for="lightdark-checkbox" id="lightdark-label">
+      <input type="checkbox" id="lightdark-checkbox"/>
+      <div class="btn-neutral"></div>
+    </label>
+  </li>
+  
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>rball.response_database</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <script type="text/javascript" src=../../_static/custom.js></script>
+  
+           <div itemprop="articleBody">
+             
+  <h1>Source code for rball.response_database</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">replace</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numba</span> <span class="k">as</span> <span class="nn">nb</span>
+<span class="kn">import</span> <span class="nn">stripy</span>
+<span class="kn">from</span> <span class="nn">stripy.spherical</span> <span class="kn">import</span> <span class="n">lonlat2xyz</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">mpl_toolkits.mplot3d</span> <span class="kn">import</span> <span class="n">Axes3D</span>
+<span class="kn">import</span> <span class="nn">ipyvolume</span> <span class="k">as</span> <span class="nn">ipv</span>
+<span class="kn">import</span> <span class="nn">pythreejs</span>
+
+<span class="kn">from</span> <span class="nn">threeML.utils.OGIP.response</span> <span class="kn">import</span> <span class="n">InstrumentResponse</span>
+
+<span class="kn">import</span> <span class="nn">h5py</span>
+
+
+<span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="kn">import</span> <span class="n">setup_logger</span>
+
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">setup_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ResponseDatabase"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.response_database.ResponseDatabase">[docs]</a><span class="k">class</span> <span class="nc">ResponseDatabase</span><span class="p">:</span>
+<div class="viewcode-block" id="ResponseDatabase.__init__"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.response_database.ResponseDatabase.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">list_of_matrices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">theta</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">phi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">ebounds</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+        <span class="n">monte_carlo_energies</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param list_of_matrices:</span>
+<span class="sd">        :type list_of_matrices: np.ndarray</span>
+<span class="sd">        :param theta:</span>
+<span class="sd">        :type theta: np.ndarray</span>
+<span class="sd">        :param phi:</span>
+<span class="sd">        :type phi: np.ndarray</span>
+<span class="sd">        :param ebounds:</span>
+<span class="sd">        :type ebounds: np.ndarray</span>
+<span class="sd">        :param monte_carlo_energies:</span>
+<span class="sd">        :type monte_carlo_energies: np.ndarray</span>
+<span class="sd">        ::</span>
+<span class="sd">        :returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_matrices</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">list_of_matrices</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_ebounds</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">ebounds</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_monte_carlo_energies</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">monte_carlo_energies</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_n_grid_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matrices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_matrix_shape</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matrices</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_occulted_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_matrix_shape</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_grid_points</span><span class="p">:</span>
+
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;theta points (</span><span class="si">{</span><span class="n">theta</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">) not equal to number of matrices (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_grid_points</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="p">)</span>
+
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_theta</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">theta</span>
+
+        <span class="k">if</span> <span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_grid_points</span><span class="p">:</span>
+
+            <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;phi points (</span><span class="si">{</span><span class="n">phi</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">) not equal to number of matrices (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_n_grid_points</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="p">)</span>
+
+            <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_phi</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span> <span class="o">=</span> <span class="n">phi</span>
+
+        <span class="c1"># create the triangulation</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_triangulation</span><span class="p">()</span>
+
+        <span class="c1"># now intitialize the current matrix</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; setting the current matrix to the first data point&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_matrix</span><span class="p">:</span> <span class="n">InstrumentResponse</span> <span class="o">=</span> <span class="n">InstrumentResponse</span><span class="p">(</span>
+            <span class="n">matrix</span><span class="o">=</span><span class="n">list_of_matrices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">ebounds</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_ebounds</span><span class="p">,</span>
+            <span class="n">monte_carlo_energies</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_monte_carlo_energies</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">interpolate_to_position</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_response</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InstrumentResponse</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_matrix</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">grid_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_triangulation</span><span class="o">.</span><span class="n">points</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">n_grid_points</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        the number of grid points in</span>
+<span class="sd">        the response database</span>
+<span class="sd">        :returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_n_grid_points</span>
+
+    <span class="k">def</span> <span class="nf">_generate_triangulation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;generating the triangulation&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_triangulation</span> <span class="o">=</span> <span class="n">stripy</span><span class="o">.</span><span class="n">spherical</span><span class="o">.</span><span class="n">sTriangulation</span><span class="p">(</span>
+            <span class="n">lons</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_phi</span><span class="p">,</span> <span class="n">lats</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_theta</span><span class="p">,</span> <span class="n">permute</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">tree</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
+
+<div class="viewcode-block" id="ResponseDatabase._transform_to_instrument_coordinates"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.response_database.ResponseDatabase._transform_to_instrument_coordinates">[docs]</a>    <span class="k">def</span> <span class="nf">_transform_to_instrument_coordinates</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ra</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dec</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        This is a stub function that should take and RA/Dec pair (in degrees)</span>
+<span class="sd">        and convert it into the coordinate system of the intruments which may</span>
+<span class="sd">        or may not be in motion.</span>
+
+<span class="sd">        The function should return a spherical theta, phi tuple in radian</span>
+
+<span class="sd">        :param ra:</span>
+<span class="sd">        :param dec:</span>
+
+<span class="sd">        :returns: (theta, phi) in radian</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">([</span><span class="n">dec</span><span class="p">,</span> <span class="n">ra</span><span class="p">])</span></div>
+
+<div class="viewcode-block" id="ResponseDatabase.interpolate_to_position"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.response_database.ResponseDatabase.interpolate_to_position">[docs]</a>    <span class="k">def</span> <span class="nf">interpolate_to_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ra</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dec</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform_to_instrument_coordinates</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+
+        <span class="c1"># obtain the surrounding matricies and their normalized</span>
+        <span class="c1"># barycenters</span>
+
+        <span class="n">bbc</span><span class="p">,</span> <span class="n">tri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_triangulation</span><span class="o">.</span><span class="n">containing_simplex_and_bcc</span><span class="p">(</span><span class="n">theta</span><span class="p">,</span> <span class="n">phi</span><span class="p">)</span>
+
+        <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;weights: </span><span class="si">{</span><span class="n">bbc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">, indices: </span><span class="si">{</span><span class="n">tri</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">matrix</span> <span class="o">=</span> <span class="n">_linear_interpolation</span><span class="p">(</span><span class="n">bbc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="bp">self</span><span class="o">.</span><span class="n">_matrices</span><span class="p">[</span><span class="n">tri</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+        <span class="c1"># update teh 3ML matrix</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_matrix</span><span class="o">.</span><span class="n">replace_matrix</span><span class="p">(</span><span class="n">matrix</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_ra</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">ra</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_current_dec</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="n">dec</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">current_sky_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_ra</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_dec</span>
+
+<div class="viewcode-block" id="ResponseDatabase.plot_verticies"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.response_database.ResponseDatabase.plot_verticies">[docs]</a>    <span class="k">def</span> <span class="nf">plot_verticies</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">plt</span><span class="o">.</span><span class="n">Figure</span><span class="p">:</span>
+
+        <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;3d&quot;</span><span class="p">))</span>
+
+        <span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_triangulation</span><span class="o">.</span><span class="n">points</span>
+        <span class="n">segs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_triangulation</span><span class="o">.</span><span class="n">identify_segments</span><span class="p">()</span>
+
+        <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span>
+        <span class="p">)</span>
+
+        <span class="c1"># plot the verticies</span>
+
+        <span class="k">for</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="ow">in</span> <span class="n">segs</span><span class="p">:</span>
+
+            <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">points</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+                <span class="p">[</span><span class="n">points</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+                <span class="p">[</span><span class="n">points</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span>
+                <span class="n">color</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="n">xyzlim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">ax</span><span class="o">.</span><span class="n">get_xlim3d</span><span class="p">(),</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim3d</span><span class="p">(),</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_zlim3d</span><span class="p">()])</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">XYZlim</span> <span class="o">=</span> <span class="p">[</span><span class="nb">min</span><span class="p">(</span><span class="n">xyzlim</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="nb">max</span><span class="p">(</span><span class="n">xyzlim</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim3d</span><span class="p">(</span><span class="n">XYZlim</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim3d</span><span class="p">(</span><span class="n">XYZlim</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_zlim3d</span><span class="p">(</span><span class="n">XYZlim</span><span class="p">)</span>
+        <span class="n">ax</span><span class="o">.</span><span class="n">set_box_aspect</span><span class="p">(</span>
+            <span class="p">[</span>
+                <span class="n">ub</span> <span class="o">-</span> <span class="n">lb</span>
+                <span class="k">for</span> <span class="n">lb</span><span class="p">,</span> <span class="n">ub</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;get_</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s2">lim&quot;</span><span class="p">)()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="s2">&quot;xyz&quot;</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">fig</span></div>
+
+<div class="viewcode-block" id="ResponseDatabase.plot_verticies_ipv"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.response_database.ResponseDatabase.plot_verticies_ipv">[docs]</a>    <span class="k">def</span> <span class="nf">plot_verticies_ipv</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">selected_location</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Iterable</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">        :param selected_location: ra, dec tuple in degree</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">background_color</span> <span class="o">=</span> <span class="s2">&quot;#2E0E49&quot;</span>
+        <span class="n">grid_color</span> <span class="o">=</span> <span class="s2">&quot;#FDFF8D&quot;</span>
+        <span class="n">grid_color2</span> <span class="o">=</span> <span class="s2">&quot;#FDFEAE&quot;</span>
+        <span class="n">selected_color</span> <span class="o">=</span> <span class="s2">&quot;#FF6563&quot;</span>
+        <span class="n">point_color</span> <span class="o">=</span> <span class="s2">&quot;#63FFA3&quot;</span>
+
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">ipv</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">600</span><span class="p">)</span>
+        <span class="n">ipv</span><span class="o">.</span><span class="n">pylab</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">box_off</span><span class="p">()</span>
+        <span class="c1"># ipv.pylab.style.axes_off()</span>
+        <span class="n">ipv</span><span class="o">.</span><span class="n">pylab</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">set_style_dark</span><span class="p">()</span>
+        <span class="n">ipv</span><span class="o">.</span><span class="n">pylab</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_color</span><span class="p">(</span><span class="n">background_color</span><span class="p">)</span>
+
+        <span class="n">points</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_triangulation</span><span class="o">.</span><span class="n">points</span>
+        <span class="n">segs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_triangulation</span><span class="o">.</span><span class="n">identify_segments</span><span class="p">()</span>
+
+        <span class="n">scatter</span> <span class="o">=</span> <span class="n">ipv</span><span class="o">.</span><span class="n">pylab</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+            <span class="n">points</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span>
+            <span class="n">points</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span>
+            <span class="n">points</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">grid_color</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">color_selected</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;sphere&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="c1"># scatter.selected = tri[0]</span>
+
+        <span class="k">for</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span> <span class="ow">in</span> <span class="n">segs</span><span class="p">:</span>
+            <span class="n">ipv</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">points</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span>
+                <span class="p">[</span><span class="n">points</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+                <span class="p">[</span><span class="n">points</span><span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">points</span><span class="p">[</span><span class="n">s2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]],</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">grid_color2</span><span class="p">,</span>
+                <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+            <span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">selected_location</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="n">theta</span><span class="p">,</span> <span class="n">phi</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_transform_to_instrument_coordinates</span><span class="p">(</span>
+                <span class="o">*</span><span class="n">selected_location</span>
+            <span class="p">)</span>
+
+            <span class="n">this_point</span> <span class="o">=</span> <span class="n">lonlat2xyz</span><span class="p">(</span><span class="n">phi</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+
+            <span class="n">bbc</span><span class="p">,</span> <span class="n">tri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_triangulation</span><span class="o">.</span><span class="n">containing_simplex_and_bcc</span><span class="p">(</span>
+                <span class="n">phi</span><span class="p">,</span> <span class="n">theta</span>
+            <span class="p">)</span>
+
+            <span class="n">ipv</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+                <span class="n">points</span><span class="p">[</span><span class="n">tri</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+                <span class="n">points</span><span class="p">[</span><span class="n">tri</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+                <span class="n">points</span><span class="p">[</span><span class="n">tri</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">color</span><span class="o">=</span><span class="n">selected_color</span><span class="p">,</span>
+                <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;sphere&quot;</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">ipv</span><span class="o">.</span><span class="n">pylab</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">*</span><span class="n">this_point</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">point_color</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;sphere&quot;</span><span class="p">)</span>
+
+        <span class="n">ipv</span><span class="o">.</span><span class="n">xyzlim</span><span class="p">(</span><span class="mf">1.1</span><span class="p">)</span>
+        <span class="n">ipv</span><span class="o">.</span><span class="n">pylab</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">box_off</span><span class="p">()</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">camera</span><span class="o">.</span><span class="n">up</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+        <span class="n">control</span> <span class="o">=</span> <span class="n">pythreejs</span><span class="o">.</span><span class="n">OrbitControls</span><span class="p">(</span><span class="n">controlling</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">camera</span><span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">controls</span> <span class="o">=</span> <span class="n">control</span>
+        <span class="n">control</span><span class="o">.</span><span class="n">autoRotate</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">render_continuous</span> <span class="o">=</span> <span class="kc">True</span>
+
+        <span class="n">ipv</span><span class="o">.</span><span class="n">show</span><span class="p">()</span></div></div>
+
+
+<span class="c1">#        return fig</span>
+
+
+<span class="c1"># @nb.njit(fastmath=True)</span>
+<span class="k">def</span> <span class="nf">_linear_interpolation</span><span class="p">(</span>
+    <span class="n">weights</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">super_matrix</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+
+    <span class="n">shape</span> <span class="o">=</span> <span class="n">super_matrix</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+
+    <span class="n">out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+
+        <span class="n">out</span> <span class="o">+=</span> <span class="n">weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">super_matrix</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">out</span>
+</pre></div>
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, J. Michael Burgess.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

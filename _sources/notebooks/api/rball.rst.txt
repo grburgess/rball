@@ -1,0 +1,38 @@
+rball package
+=============
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   rball.io
+   rball.utils
+
+Submodules
+----------
+
+rball.rballlike module
+----------------------
+
+.. automodule:: rball.rballlike
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+rball.response\_database module
+-------------------------------
+
+.. automodule:: rball.response_database
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: rball
+   :members:
+   :undoc-members:
+   :show-inheritance:

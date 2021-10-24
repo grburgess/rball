@@ -1,0 +1,323 @@
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rball.rballlike &mdash; rball  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <link rel="stylesheet" href="../../_static/pygments/default.css" type="text/css" id="pygments-style">
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css">
+   
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> rball
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">rball</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+  <!--
+  <div class="admonition note">
+    <p><a href="https://github.com/lukelbd">ProPlot author here</a>: Due to my day job as a graduate student, certain <a href="https://github.com/lukelbd/proplot/pulls?q=is%3Aopen+is%3Apr">feature additions</a> may be delayed to the summer of 2020. In the meantime, if you are interested in contributing to ProPlot, please see the <a href="https://proplot.readthedocs.io/en/latest/contributions.html">contribution guide</a>. Any amount of help is welcome!
+    </p>
+  </div>
+  -->
+  <li id="lightdark-li">
+    <label for="lightdark-checkbox" id="lightdark-label">
+      <input type="checkbox" id="lightdark-checkbox"/>
+      <div class="btn-neutral"></div>
+    </label>
+  </li>
+  
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Module code</a> &raquo;</li>
+      <li>rball.rballlike</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <script type="text/javascript" src=../../_static/custom.js></script>
+  
+           <div itemprop="articleBody">
+             
+  <h1>Source code for rball.rballlike</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
+
+<span class="kn">from</span> <span class="nn">threeML.plugins.DispersionSpectrumLike</span> <span class="kn">import</span> <span class="n">DispersionSpectrumLike</span>
+<span class="kn">from</span> <span class="nn">threeML.plugins.OGIPLike</span> <span class="kn">import</span> <span class="n">OGIPLike</span>
+<span class="kn">from</span> <span class="nn">astromodels</span> <span class="kn">import</span> <span class="n">Model</span>
+
+<span class="kn">from</span> <span class="nn">astromodels.functions.priors</span> <span class="kn">import</span> <span class="n">Cosine_Prior</span><span class="p">,</span> <span class="n">Uniform_prior</span>
+
+<span class="kn">from</span> <span class="nn">.response_database</span> <span class="kn">import</span> <span class="n">ResponseDatabase</span>
+
+<span class="kn">from</span> <span class="nn">.utils.logging</span> <span class="kn">import</span> <span class="n">setup_logger</span>
+<span class="kn">from</span> <span class="nn">rball</span> <span class="kn">import</span> <span class="n">response_database</span>
+
+
+<span class="n">log</span> <span class="o">=</span> <span class="n">setup_logger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="RBallLike"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.rballlike.RBallLike">[docs]</a><span class="k">class</span> <span class="nc">RBallLike</span><span class="p">(</span><span class="n">DispersionSpectrumLike</span><span class="p">):</span>
+<div class="viewcode-block" id="RBallLike.__init__"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.rballlike.RBallLike.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">observation</span><span class="p">,</span>
+        <span class="n">response_database</span><span class="p">:</span> <span class="n">ResponseDatabase</span><span class="p">,</span>
+        <span class="n">background</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">free_position</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_free_position</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">free_position</span>
+
+        <span class="c1"># we replace the response of the observation</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_response_database</span><span class="p">:</span> <span class="n">ResponseDatabase</span> <span class="o">=</span> <span class="n">response_database</span>
+
+        <span class="n">observation</span><span class="o">.</span><span class="n">_response</span> <span class="o">=</span> <span class="n">response_database</span><span class="o">.</span><span class="n">current_response</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">RBallLike</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">observation</span><span class="p">,</span> <span class="n">background</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RBallLike.set_model"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.rballlike.RBallLike.set_model">[docs]</a>    <span class="k">def</span> <span class="nf">set_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">likelihood_model</span><span class="p">:</span> <span class="n">Model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Set the model and free the location parameters</span>
+
+
+<span class="sd">        :param likelihood_model:</span>
+<span class="sd">        :return: None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="c1"># set the standard likelihood model</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">RBallLike</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="n">likelihood_model</span><span class="p">)</span>
+
+        <span class="c1"># now free the position</span>
+        <span class="c1"># if it is needed</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_free_position</span><span class="p">:</span>
+
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;freeing the position of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> and setting priors&quot;</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">free</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">free</span> <span class="o">=</span> <span class="kc">True</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span>
+                    <span class="n">key</span>
+                <span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">prior</span> <span class="o">=</span> <span class="n">Uniform_prior</span><span class="p">(</span>
+                    <span class="n">lower_bound</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">upper_bound</span><span class="o">=</span><span class="mi">360</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span>
+                    <span class="n">key</span>
+                <span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">prior</span> <span class="o">=</span> <span class="n">Cosine_Prior</span><span class="p">(</span>
+                    <span class="n">lower_bound</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">upper_bound</span><span class="o">=</span><span class="mi">90</span>
+                <span class="p">)</span>
+
+                <span class="n">ra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">value</span>
+                <span class="n">dec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+
+                <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span>
+                    <span class="n">key</span>
+                <span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">prior</span> <span class="o">=</span> <span class="n">Uniform_prior</span><span class="p">(</span>
+                    <span class="n">lower_bound</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">upper_bound</span><span class="o">=</span><span class="mi">360</span>
+                <span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span>
+                    <span class="n">key</span>
+                <span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">prior</span> <span class="o">=</span> <span class="n">Cosine_Prior</span><span class="p">(</span>
+                    <span class="n">lower_bound</span><span class="o">=-</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">upper_bound</span><span class="o">=</span><span class="mi">90</span>
+                <span class="p">)</span>
+
+                <span class="n">ra</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">value</span>
+                <span class="n">dec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">point_sources</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">.</span><span class="n">position</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">value</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_response_database</span><span class="o">.</span><span class="n">interpolate_to_position</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RBallLike.get_model"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.rballlike.RBallLike.get_model">[docs]</a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precalc_fluxes</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="c1"># Here we update the GBM drm parameters which creates and new DRM for that location</span>
+        <span class="c1"># we should only be dealing with one source for GBM</span>
+
+        <span class="c1"># update the location</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_free_position</span><span class="p">:</span>
+
+            <span class="c1"># assumes that the is only one point source which is how it should be!</span>
+            <span class="n">ra</span><span class="p">,</span> <span class="n">dec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_like_model</span><span class="o">.</span><span class="n">get_point_source_position</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">_response_database</span><span class="o">.</span><span class="n">interpolate_to_position</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_model</span><span class="p">(</span><span class="n">precalc_fluxes</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="RBallLike.from_spectrumlike"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.rballlike.RBallLike.from_spectrumlike">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_spectrumlike</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">spectrum_like</span><span class="p">:</span> <span class="n">DispersionSpectrumLike</span><span class="p">,</span>
+        <span class="n">response_database</span><span class="p">:</span> <span class="n">ResponseDatabase</span><span class="p">,</span>
+        <span class="n">free_position</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generate a RBallLike from an existing SpectrumLike child</span>
+
+
+<span class="sd">        :param spectrum_like: the existing spectrumlike</span>
+<span class="sd">        :param response_database:  a response database</span>
+<span class="sd">        :param free_position: if the position should be free</span>
+<span class="sd">        :return:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">observation</span> <span class="o">=</span> <span class="n">spectrum_like</span><span class="o">.</span><span class="n">_observed_spectrum</span><span class="o">.</span><span class="n">to_binned_spectrum</span><span class="p">()</span>
+
+        <span class="k">except</span><span class="p">:</span>
+
+            <span class="n">observation</span> <span class="o">=</span> <span class="n">spectrum_like</span><span class="o">.</span><span class="n">_observed_spectrum</span>
+
+        <span class="k">try</span><span class="p">:</span>
+
+            <span class="n">bkg</span> <span class="o">=</span> <span class="n">spectrum_like</span><span class="o">.</span><span class="n">_background_spectrum</span><span class="o">.</span><span class="n">to_binned_spectrum</span><span class="p">()</span>
+
+        <span class="k">except</span><span class="p">:</span>
+
+            <span class="n">bkg</span> <span class="o">=</span> <span class="n">spectrum_like</span><span class="o">.</span><span class="n">_background_spectrum</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span>
+            <span class="n">spectrum_like</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">observation</span><span class="p">,</span>
+            <span class="n">response_database</span><span class="p">,</span>
+            <span class="n">bkg</span><span class="p">,</span>
+            <span class="n">free_position</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="RBallLike.from_ogip"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.rballlike.RBallLike.from_ogip">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_ogip</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">observation</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">response_database</span><span class="p">:</span> <span class="n">ResponseDatabase</span><span class="p">,</span>
+        <span class="n">background</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">spectrum_number</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">free_position</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Create an RBallLike from OGIP files</span>
+
+<span class="sd">        :param cls:</span>
+<span class="sd">        :type cls:</span>
+<span class="sd">        :param name:</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :param observation:</span>
+<span class="sd">        :type observation: str</span>
+<span class="sd">        :param background:</span>
+<span class="sd">        :type background: str</span>
+<span class="sd">        :param response_database:</span>
+<span class="sd">        :type response_database: ResponseDatabase</span>
+<span class="sd">        :param spectrum_number:</span>
+<span class="sd">        :type spectrum_number: Optional[int]</span>
+<span class="sd">        :param free_position:</span>
+<span class="sd">        :type free_position: bool</span>
+<span class="sd">        :returns:</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">OGIPLike</span><span class="p">(</span>
+            <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+            <span class="n">observation</span><span class="o">=</span><span class="n">observation</span><span class="p">,</span>
+            <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span>
+            <span class="n">response</span><span class="o">=</span><span class="n">response_database</span><span class="o">.</span><span class="n">current_response</span><span class="p">,</span>
+            <span class="n">spectrum_number</span><span class="o">=</span><span class="n">spectrum_number</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_spectrumlike</span><span class="p">(</span>
+            <span class="n">tmp</span><span class="p">,</span>
+            <span class="n">response_database</span><span class="o">=</span><span class="n">response_database</span><span class="p">,</span>
+            <span class="n">free_position</span><span class="o">=</span><span class="n">free_position</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div>
+
+<div class="viewcode-block" id="RBallLike.get_simulated_dataset"><a class="viewcode-back" href="../../notebooks/api/rball.html#rball.rballlike.RBallLike.get_simulated_dataset">[docs]</a>    <span class="k">def</span> <span class="nf">get_simulated_dataset</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get_simulated_dataset</span><span class="p">(</span>
+            <span class="n">new_name</span><span class="o">=</span><span class="n">new_name</span><span class="p">,</span>
+            <span class="n">response_database</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_response_database</span><span class="p">,</span>
+            <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+        <span class="p">)</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, J. Michael Burgess.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

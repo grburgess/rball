@@ -1,0 +1,270 @@
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>jupyter: jupytext: formats: ipynb,md text_representation: extension: .md format_name: markdown format_version: ‘1.3’ jupytext_version: 1.13.0 kernelspec: display_name: Python 3 (ipykernel) language: python name: python3 &mdash; rball  documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <link rel="stylesheet" href="../_static/pygments/default.css" type="text/css" id="pygments-style">
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css">
+   
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> rball
+            <img src="../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">jupyter:
+jupytext:
+formats: ipynb,md
+text_representation:
+extension: .md
+format_name: markdown
+format_version: ‘1.3’
+jupytext_version: 1.13.0
+kernelspec:
+display_name: Python 3 (ipykernel)
+language: python
+name: python3</a></li>
+<li><a class="reference internal" href="#quick-start">Quick start</a><ul>
+<li><a class="reference internal" href="#creating-a-responsedatabase-object">Creating a ResponseDatabase object</a></li>
+<li><a class="reference internal" href="#examining-the-sky-grid">Examining the sky grid</a></li>
+<li><a class="reference internal" href="#using-and-interpolating-responses">Using and interpolating responses</a></li>
+<li><a class="reference internal" href="#general-notes-on-units-and-construction">General notes on units and construction</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rball</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+  <!--
+  <div class="admonition note">
+    <p><a href="https://github.com/lukelbd">ProPlot author here</a>: Due to my day job as a graduate student, certain <a href="https://github.com/lukelbd/proplot/pulls?q=is%3Aopen+is%3Apr">feature additions</a> may be delayed to the summer of 2020. In the meantime, if you are interested in contributing to ProPlot, please see the <a href="https://proplot.readthedocs.io/en/latest/contributions.html">contribution guide</a>. Any amount of help is welcome!
+    </p>
+  </div>
+  -->
+  <li id="lightdark-li">
+    <label for="lightdark-checkbox" id="lightdark-label">
+      <input type="checkbox" id="lightdark-checkbox"/>
+      <div class="btn-neutral"></div>
+    </label>
+  </li>
+  
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>jupyter:
+jupytext:
+formats: ipynb,md
+text_representation:
+extension: .md
+format_name: markdown
+format_version: ‘1.3’
+jupytext_version: 1.13.0
+kernelspec:
+display_name: Python 3 (ipykernel)
+language: python
+name: python3</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <script type="text/javascript" src=../_static/custom.js></script>
+  
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<hr class="docutils" />
+<section id="jupyter-jupytext-formats-ipynb-md-text-representation-extension-md-format-name-markdown-format-version-1-3-jupytext-version-1-13-0-kernelspec-display-name-python-3-ipykernel-language-python-name-python3">
+<h1>jupyter:
+jupytext:
+formats: ipynb,md
+text_representation:
+extension: .md
+format_name: markdown
+format_version: ‘1.3’
+jupytext_version: 1.13.0
+kernelspec:
+display_name: Python 3 (ipykernel)
+language: python
+name: python3<a class="headerlink" href="#jupyter-jupytext-formats-ipynb-md-text-representation-extension-md-format-name-markdown-format-version-1-3-jupytext-version-1-13-0-kernelspec-display-name-python-3-ipykernel-language-python-name-python3" title="Permalink to this headline"></a></h1>
+</section>
+<section id="quick-start">
+<h1>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline"></a></h1>
+<p>$$ V_{n}(R)=\frac{\pi^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}+1\right)} R^{n} $$</p>
+<p><code class="docutils literal notranslate"><span class="pre">rball</span></code> is a utility to store and interpolate instrument response matrices on the sky.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rball</span> <span class="kn">import</span> <span class="n">ResponseDatabase</span>
+<span class="kn">from</span> <span class="nn">rball.utils</span> <span class="kn">import</span> <span class="n">get_path_of_data_file</span>
+
+<span class="kn">import</span> <span class="nn">h5py</span>
+
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+<section id="creating-a-responsedatabase-object">
+<h2>Creating a ResponseDatabase object<a class="headerlink" href="#creating-a-responsedatabase-object" title="Permalink to this headline"></a></h2>
+<p>First we will use a demo database stored in an HDF5 file to create a response database.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_name</span> <span class="o">=</span> <span class="n">get_path_of_data_file</span><span class="p">(</span><span class="s2">&quot;demo_rsp_database.h5&quot;</span><span class="p">)</span>
+
+<span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+    
+    <span class="c1"># the base grid point matrices</span>
+    <span class="c1"># should be an (N grid points, N ebounds, N monte carlo energies)</span>
+    <span class="c1"># numpy array</span>
+
+    <span class="n">list_of_matrices</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;matrix&quot;</span><span class="p">][()]</span>
+    
+    <span class="c1"># theta and phi are the </span>
+    <span class="c1"># lon and lat points of </span>
+    <span class="c1"># the matrix database in radian</span>
+    
+    <span class="n">theta</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;theta&quot;</span><span class="p">][()]</span>
+
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;phi&quot;</span><span class="p">][()]</span>
+
+    <span class="c1"># the bounds of the response</span>
+    
+    <span class="n">ebounds</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;ebounds&quot;</span><span class="p">][()]</span>
+
+    <span class="n">mc_energies</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;mc_energies&quot;</span><span class="p">][()]</span>
+
+    <span class="n">rsp_db</span> <span class="o">=</span> <span class="n">ResponseDatabase</span><span class="p">(</span>
+        <span class="n">list_of_matrices</span><span class="o">=</span><span class="n">list_of_matrices</span><span class="p">,</span>
+        <span class="n">theta</span><span class="o">=</span><span class="n">theta</span><span class="p">,</span>
+        <span class="n">phi</span><span class="o">=</span><span class="n">phi</span><span class="p">,</span>
+        <span class="n">ebounds</span><span class="o">=</span><span class="n">ebounds</span><span class="p">,</span>
+        <span class="n">monte_carlo_energies</span><span class="o">=</span><span class="n">mc_energies</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="examining-the-sky-grid">
+<h2>Examining the sky grid<a class="headerlink" href="#examining-the-sky-grid" title="Permalink to this headline"></a></h2>
+<p>We can view the grid in 3D. When a point in the sky is selected, a <a class="reference external" href="https://en.wikipedia.org/wiki/Delaunay_triangulation">Delaunay triangulation</a> is used to find the three matrices surrounding this point.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rsp_db</span><span class="o">.</span><span class="n">plot_verticies_ipv</span><span class="p">(</span><span class="n">selected_location</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="o">-</span><span class="mi">45</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="using-and-interpolating-responses">
+<h2>Using and interpolating responses<a class="headerlink" href="#using-and-interpolating-responses" title="Permalink to this headline"></a></h2>
+<p>Internally, the <code class="docutils literal notranslate"><span class="pre">ResponseDatabase</span></code> is storing a 3ML <code class="docutils literal notranslate"><span class="pre">InstrumentResponse</span></code> object</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rsp_db</span><span class="o">.</span><span class="n">current_response</span><span class="o">.</span><span class="n">plot_matrix</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>When we want to interpolate a matrix to a point on the sky, the encapsulating matricies ($M_i$) are found and the barycentered distances ($b_i$) withing the triangle is used to create an interpolated matrix ($M_{\mathrm{intrp}}$) such that</p>
+<p>$$ M_{\mathrm{intrp}} = \sum^{3}<em>{i} b_i M</em>{i}  $$</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rsp_db</span><span class="o">.</span><span class="n">interpolate_to_position</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rsp_db</span><span class="o">.</span><span class="n">current_response</span><span class="o">.</span><span class="n">plot_matrix</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">theta</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">30</span><span class="p">):</span>
+    <span class="n">rsp_db</span><span class="o">.</span><span class="n">interpolate_to_position</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="n">theta</span><span class="p">)</span>
+    <span class="n">rsp_db</span><span class="o">.</span><span class="n">current_response</span><span class="o">.</span><span class="n">plot_matrix</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="general-notes-on-units-and-construction">
+<h2>General notes on units and construction<a class="headerlink" href="#general-notes-on-units-and-construction" title="Permalink to this headline"></a></h2>
+<p>The theta and phi coordinates are internally in <strong>radians</strong>, but all inputs are in <strong>degrees</strong> for the user. Moreover, both the plotting and interpolation assume inputs in J2000 RA, Dec coordinates. When subclassing <code class="docutils literal notranslate"><span class="pre">ResponseDatabase</span></code>, an private function should be defined (<code class="docutils literal notranslate"> <span class="pre">_transform_to_instrument_coordinates</span></code>) which takes as inputs RA and Dec in degrees and transforms to the spacecraft coordinates of the response grid points resulting in a return of a theta, phi tuple in radians.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, J. Michael Burgess.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

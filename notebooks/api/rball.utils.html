@@ -1,0 +1,450 @@
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rball.utils package &mdash; rball  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <link rel="stylesheet" href="../../_static/pygments/default.css" type="text/css" id="pygments-style">
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css">
+   
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> rball
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">rball.utils package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-rball.utils.file_utils">rball.utils.file_utils module</a></li>
+<li><a class="reference internal" href="#module-rball.utils.geometry">rball.utils.geometry module</a></li>
+<li><a class="reference internal" href="#module-rball.utils.logging">rball.utils.logging module</a></li>
+<li><a class="reference internal" href="#module-rball.utils.package_data">rball.utils.package_data module</a></li>
+<li><a class="reference internal" href="#module-rball.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">rball</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+  <!--
+  <div class="admonition note">
+    <p><a href="https://github.com/lukelbd">ProPlot author here</a>: Due to my day job as a graduate student, certain <a href="https://github.com/lukelbd/proplot/pulls?q=is%3Aopen+is%3Apr">feature additions</a> may be delayed to the summer of 2020. In the meantime, if you are interested in contributing to ProPlot, please see the <a href="https://proplot.readthedocs.io/en/latest/contributions.html">contribution guide</a>. Any amount of help is welcome!
+    </p>
+  </div>
+  -->
+  <li id="lightdark-li">
+    <label for="lightdark-checkbox" id="lightdark-label">
+      <input type="checkbox" id="lightdark-checkbox"/>
+      <div class="btn-neutral"></div>
+    </label>
+  </li>
+  
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>rball.utils package</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <script type="text/javascript" src=../../_static/custom.js></script>
+  
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="rball-utils-package">
+<h1>rball.utils package<a class="headerlink" href="#rball-utils-package" title="Permalink to this headline"></a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-rball.utils.file_utils">
+<span id="rball-utils-file-utils-module"></span><h2>rball.utils.file_utils module<a class="headerlink" href="#module-rball.utils.file_utils" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.file_utils.sanitize_filename">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.file_utils.</span></span><span class="sig-name descname"><span class="pre">sanitize_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abspath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="reference internal" href="../../_modules/rball/utils/file_utils.html#sanitize_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.file_utils.sanitize_filename" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.file_utils.file_existing_and_readable">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.file_utils.</span></span><span class="sig-name descname"><span class="pre">file_existing_and_readable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/rball/utils/file_utils.html#file_existing_and_readable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.file_utils.file_existing_and_readable" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.file_utils.path_exists_and_is_directory">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.file_utils.</span></span><span class="sig-name descname"><span class="pre">path_exists_and_is_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/rball/utils/file_utils.html#path_exists_and_is_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.file_utils.path_exists_and_is_directory" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-rball.utils.geometry">
+<span id="rball-utils-geometry-module"></span><h2>rball.utils.geometry module<a class="headerlink" href="#module-rball.utils.geometry" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.geometry.ang2cart">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.geometry.</span></span><span class="sig-name descname"><span class="pre">ang2cart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="../../_modules/rball/utils/geometry.html#ang2cart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.geometry.ang2cart" title="Permalink to this definition"></a></dt>
+<dd><p>convert spherical coordinates (in deg)
+to cartesian</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ra</strong> – </p></li>
+<li><p><strong>dec</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.geometry.get_ang">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.geometry.</span></span><span class="sig-name descname"><span class="pre">get_ang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../../_modules/rball/utils/geometry.html#get_ang"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.geometry.get_ang" title="Permalink to this definition"></a></dt>
+<dd><p>get the angular seperation (in radian)
+between two cartesian vectors</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>X1</strong> – </p></li>
+<li><p><strong>X2</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.geometry.is_occulted">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.geometry.</span></span><span class="sig-name descname"><span class="pre">is_occulted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_pos</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/geometry.html#is_occulted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.geometry.is_occulted" title="Permalink to this definition"></a></dt>
+<dd><p>compute if the earth shadows the</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ra</strong> – </p></li>
+<li><p><strong>dec</strong> – </p></li>
+<li><p><strong>sc_pos</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-rball.utils.logging">
+<span id="rball-utils-logging-module"></span><h2>rball.utils.logging module<a class="headerlink" href="#module-rball.utils.logging" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.colored">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">colored</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ansi_code</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#colored"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.colored" title="Permalink to this definition"></a></dt>
+<dd><p>Colorize text, while stripping nested ANSI color sequences.
+Author:  Konstantin Lepa &lt;<a class="reference external" href="mailto:konstantin&#46;lepa&#37;&#52;&#48;gmail&#46;com">konstantin<span>&#46;</span>lepa<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt; / termcolor
+Available text colors:</p>
+<blockquote>
+<div><p>red, green, yellow, blue, magenta, cyan, white.</p>
+</div></blockquote>
+<dl class="simple">
+<dt>Available text highlights:</dt><dd><p>on_red, on_green, on_yellow, on_blue, on_magenta, on_cyan, on_white.</p>
+</dd>
+<dt>Available attributes:</dt><dd><p>bold, dark, underline, blink, reverse, concealed.</p>
+</dd>
+</dl>
+<p class="rubric">Example</p>
+<p>colored(‘Hello, World!’, ‘red’, ‘on_grey’, [‘blue’, ‘blink’])
+colored(‘Hello, World!’, ‘green’)</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.cprint">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">cprint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">on_color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#cprint"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.cprint" title="Permalink to this definition"></a></dt>
+<dd><p>Print colorize text.
+Author:  Konstantin Lepa &lt;<a class="reference external" href="mailto:konstantin&#46;lepa&#37;&#52;&#48;gmail&#46;com">konstantin<span>&#46;</span>lepa<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt; / termcolor
+It accepts arguments of print function.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.isnotebook">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">isnotebook</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#isnotebook"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.isnotebook" title="Permalink to this definition"></a></dt>
+<dd><p>Check if running within a Jupyter notebook</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.supports_color">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">supports_color</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#supports_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.supports_color" title="Permalink to this definition"></a></dt>
+<dd><p>Checks if the terminal supports color.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.esc">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">esc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">x</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#esc"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.esc" title="Permalink to this definition"></a></dt>
+<dd><p>Create escaped code from format code</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.parse_colors">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">parse_colors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sequence</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#parse_colors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.parse_colors" title="Permalink to this definition"></a></dt>
+<dd><p>Return escape codes from a color sequence.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rball.utils.logging.ColoredRecord">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">ColoredRecord</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#ColoredRecord"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.ColoredRecord" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Wraps a LogRecord, adding named escape codes to the internal dict.
+The internal dict is used when formatting the message (by the PercentStyle,
+StrFormatStyle, and StringTemplateStyle classes).</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.utils.logging.ColoredRecord.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#ColoredRecord.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.ColoredRecord.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Add attributes from the escape_codes dict and the record.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rball.utils.logging.ColoredFormatter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">ColoredFormatter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datefmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondary_log_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#ColoredFormatter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.ColoredFormatter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">logging.Formatter</span></code></p>
+<p>A formatter that allows colors to be placed in the format string.
+Intended to help in creating more readable logging output.
+Based on <a class="reference external" href="https://github.com/borntyping/python-colorlog">https://github.com/borntyping/python-colorlog</a></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.utils.logging.ColoredFormatter.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fmt</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">datefmt</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'%'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">secondary_log_colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#ColoredFormatter.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.ColoredFormatter.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Set the format and colors the ColouredFormatter will use.
+The <code class="docutils literal notranslate"><span class="pre">fmt</span></code>, <code class="docutils literal notranslate"><span class="pre">datefmt</span></code> and <code class="docutils literal notranslate"><span class="pre">style</span></code> args are passed on to the
+<code class="docutils literal notranslate"><span class="pre">logging.Formatter</span></code> constructor.
+The <code class="docutils literal notranslate"><span class="pre">secondary_log_colors</span></code> argument can be used to create additional
+<code class="docutils literal notranslate"><span class="pre">log_color</span></code> attributes. Each key in the dictionary will set
+<code class="docutils literal notranslate"><span class="pre">{key}_log_color</span></code>, using the value to select from a different
+<code class="docutils literal notranslate"><span class="pre">log_colors</span></code> set.
+:Parameters:
+- fmt (str): The format string to use
+- datefmt (str): A format string for the date
+- log_colors (dict):</p>
+<blockquote>
+<div><p>A mapping of log level names to color names</p>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt>reset (bool):</dt><dd><p>Implicitly append a color reset to all records unless False</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>style (‘%’ or ‘{’ or ‘$’):</dt><dd><p>The format style to use. (<em>No meaning prior to Python 3.2.</em>)</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>secondary_log_colors (dict):</dt><dd><p>Map secondary <code class="docutils literal notranslate"><span class="pre">log_color</span></code> attributes. (<em>New in version 2.6.</em>)</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.utils.logging.ColoredFormatter.format">
+<span class="sig-name descname"><span class="pre">format</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">record</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#ColoredFormatter.format"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.ColoredFormatter.format" title="Permalink to this definition"></a></dt>
+<dd><p>Format a message from a record object.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.escape_codes">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">escape_codes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_colors</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#escape_codes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.escape_codes" title="Permalink to this definition"></a></dt>
+<dd><p>Return escape codes from a <code class="docutils literal notranslate"><span class="pre">log_colors</span></code> dict.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.hash_coloured">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">hash_coloured</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#hash_coloured"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.hash_coloured" title="Permalink to this definition"></a></dt>
+<dd><p>Return a ANSI coloured text based on its hash</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.hash_coloured_escapes">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">hash_coloured_escapes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#hash_coloured_escapes"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.hash_coloured_escapes" title="Permalink to this definition"></a></dt>
+<dd><p>Return the ANSI hash colour prefix and suffix for a given text</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rball.utils.logging.LogFilter">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">LogFilter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#LogFilter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.LogFilter" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.utils.logging.LogFilter.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#LogFilter.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.LogFilter.__init__" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.utils.logging.LogFilter.filter">
+<span class="sig-name descname"><span class="pre">filter</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">logRecord</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#LogFilter.filter"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.LogFilter.filter" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.silence_warnings">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">silence_warnings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#silence_warnings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.silence_warnings" title="Permalink to this definition"></a></dt>
+<dd><p>supress warning messages in console and file usr logs</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.activate_warnings">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">activate_warnings</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#activate_warnings"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.activate_warnings" title="Permalink to this definition"></a></dt>
+<dd><p>supress warning messages in console and file usr logs</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.update_logging_level">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">update_logging_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#update_logging_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.update_logging_level" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.logging.setup_logger">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.logging.</span></span><span class="sig-name descname"><span class="pre">setup_logger</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/logging.html#setup_logger"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.logging.setup_logger" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-rball.utils.package_data">
+<span id="rball-utils-package-data-module"></span><h2>rball.utils.package_data module<a class="headerlink" href="#module-rball.utils.package_data" title="Permalink to this headline"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.package_data.get_path_of_data_file">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.package_data.</span></span><span class="sig-name descname"><span class="pre">get_path_of_data_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_file</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="reference internal" href="../../_modules/rball/utils/package_data.html#get_path_of_data_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.package_data.get_path_of_data_file" title="Permalink to this definition"></a></dt>
+<dd><p>get the path of a dat file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>data_file</strong> (<em>str</em>) – name of the data file</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.package_data.get_path_of_data_dir">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.package_data.</span></span><span class="sig-name descname"><span class="pre">get_path_of_data_dir</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="reference internal" href="../../_modules/rball/utils/package_data.html#get_path_of_data_dir"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.package_data.get_path_of_data_dir" title="Permalink to this definition"></a></dt>
+<dd><p>get the path of the package data directory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rball.utils.package_data.get_path_of_user_config">
+<span class="sig-prename descclassname"><span class="pre">rball.utils.package_data.</span></span><span class="sig-name descname"><span class="pre">get_path_of_user_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="reference internal" href="../../_modules/rball/utils/package_data.html#get_path_of_user_config"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.package_data.get_path_of_user_config" title="Permalink to this definition"></a></dt>
+<dd><p>get the path to the user configuration</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="module-rball.utils">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rball.utils" title="Permalink to this headline"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, J. Michael Burgess.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

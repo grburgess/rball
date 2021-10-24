@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rball package &mdash; rball  documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+  <link rel="stylesheet" href="../../_static/pygments/default.css" type="text/css" id="pygments-style">
+  <link rel="stylesheet" href="../../_static/custom.css" type="text/css">
+   
+
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> rball
+            <img src="../../_static/logo.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">rball package</a><ul>
+<li><a class="reference internal" href="#subpackages">Subpackages</a></li>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-rball.rballlike">rball.rballlike module</a></li>
+<li><a class="reference internal" href="#module-rball.response_database">rball.response_database module</a></li>
+<li><a class="reference internal" href="#module-rball">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">rball</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+<div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+  <!--
+  <div class="admonition note">
+    <p><a href="https://github.com/lukelbd">ProPlot author here</a>: Due to my day job as a graduate student, certain <a href="https://github.com/lukelbd/proplot/pulls?q=is%3Aopen+is%3Apr">feature additions</a> may be delayed to the summer of 2020. In the meantime, if you are interested in contributing to ProPlot, please see the <a href="https://proplot.readthedocs.io/en/latest/contributions.html">contribution guide</a>. Any amount of help is welcome!
+    </p>
+  </div>
+  -->
+  <li id="lightdark-li">
+    <label for="lightdark-checkbox" id="lightdark-label">
+      <input type="checkbox" id="lightdark-checkbox"/>
+      <div class="btn-neutral"></div>
+    </label>
+  </li>
+  
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>rball package</li>
+
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <script type="text/javascript" src=../../_static/custom.js></script>
+  
+           <div itemprop="articleBody">
+             
+  
+<style>
+/* CSS overrides for sphinx_rtd_theme */
+
+/* 24px margin */
+.nbinput.nblast.container,
+.nboutput.nblast.container {
+    margin-bottom: 19px;  /* padding has already 5px */
+}
+
+/* ... except between code cells! */
+.nblast.container + .nbinput.container {
+    margin-top: -19px;
+}
+
+.admonition > p:before {
+    margin-right: 4px;  /* make room for the exclamation icon */
+}
+
+/* Fix math alignment, see https://github.com/rtfd/sphinx_rtd_theme/pull/686 */
+.math {
+    text-align: unset;
+}
+</style>
+<section id="rball-package">
+<h1>rball package<a class="headerlink" href="#rball-package" title="Permalink to this headline"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="rball.io.html">rball.io package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rball.io.html#module-rball.io">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="rball.utils.html">rball.utils package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="rball.utils.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rball.utils.html#module-rball.utils.file_utils">rball.utils.file_utils module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rball.utils.html#module-rball.utils.geometry">rball.utils.geometry module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rball.utils.html#module-rball.utils.logging">rball.utils.logging module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rball.utils.html#module-rball.utils.package_data">rball.utils.package_data module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="rball.utils.html#module-rball.utils">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
+</section>
+<section id="module-rball.rballlike">
+<span id="rball-rballlike-module"></span><h2>rball.rballlike module<a class="headerlink" href="#module-rball.rballlike" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rball.rballlike.RBallLike">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">rball.rballlike.</span></span><span class="sig-name descname"><span class="pre">RBallLike</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_database</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#rball.response_database.ResponseDatabase" title="rball.response_database.ResponseDatabase"><span class="pre">rball.response_database.ResponseDatabase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">free_position</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/rballlike.html#RBallLike"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.rballlike.RBallLike" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">threeML.plugins.DispersionSpectrumLike.DispersionSpectrumLike</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.rballlike.RBallLike.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_database</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#rball.response_database.ResponseDatabase" title="rball.response_database.ResponseDatabase"><span class="pre">rball.response_database.ResponseDatabase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">free_position</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/rballlike.html#RBallLike.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.rballlike.RBallLike.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>A plugin for generic spectral data with energy dispersion, accepts an observed binned spectrum,
+and a background binned spectrum or plugin with the background data.</p>
+<p>In the case of a binned background spectrum, the background model is profiled
+out and the appropriate profile-likelihood is used to fit the total spectrum. In this
+case, caution must be used when there are zero background counts in bins as the
+profiled background parameters (one per channel) will then have zero information from which to
+constrain the background. It is recommended to bin the spectrum such that there is one background count
+per channel.</p>
+<p>If either an SpectrumLike or XYLike instance is provided as background, it is assumed that this is the
+background data and the likelihood model from this plugin is used to simultaneously fit the background
+and source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – the plugin name</p></li>
+<li><p><strong>observation</strong> – the observed spectrum</p></li>
+<li><p><strong>background</strong> – the background spectrum or a plugin from which the background will be modeled</p></li>
+<li><p><strong>background_exposure</strong> – (optional) adjust the background exposure of the modeled background data comes from and</p></li>
+</ul>
+</dd>
+</dl>
+<p>XYLike plugin
+:param verbose: turn on/off verbose logging</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.rballlike.RBallLike.set_model">
+<span class="sig-name descname"><span class="pre">set_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">likelihood_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">astromodels.core.model.Model</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/rball/rballlike.html#RBallLike.set_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.rballlike.RBallLike.set_model" title="Permalink to this definition"></a></dt>
+<dd><p>Set the model and free the location parameters</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>likelihood_model</strong> – </p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.rballlike.RBallLike.get_model">
+<span class="sig-name descname"><span class="pre">get_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">precalc_fluxes</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/rballlike.html#RBallLike.get_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.rballlike.RBallLike.get_model" title="Permalink to this definition"></a></dt>
+<dd><p>The model integrated over the energy bins. Note that it only returns the  model for the
+currently active channels/measurements</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>array of folded model</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.rballlike.RBallLike.from_spectrumlike">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_spectrumlike</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">spectrum_like</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">threeML.plugins.DispersionSpectrumLike.DispersionSpectrumLike</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_database</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#rball.response_database.ResponseDatabase" title="rball.response_database.ResponseDatabase"><span class="pre">rball.response_database.ResponseDatabase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">free_position</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/rballlike.html#RBallLike.from_spectrumlike"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.rballlike.RBallLike.from_spectrumlike" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a RBallLike from an existing SpectrumLike child</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>spectrum_like</strong> – the existing spectrumlike</p></li>
+<li><p><strong>response_database</strong> – a response database</p></li>
+<li><p><strong>free_position</strong> – if the position should be free</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.rballlike.RBallLike.from_ogip">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">from_ogip</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">observation</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">response_database</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><a class="reference internal" href="#rball.response_database.ResponseDatabase" title="rball.response_database.ResponseDatabase"><span class="pre">rball.response_database.ResponseDatabase</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">background</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">spectrum_number</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">free_position</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/rballlike.html#RBallLike.from_ogip"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.rballlike.RBallLike.from_ogip" title="Permalink to this definition"></a></dt>
+<dd><p>Create an RBallLike from OGIP files</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cls</strong> – </p></li>
+<li><p><strong>name</strong> (<em>str</em>) – </p></li>
+<li><p><strong>observation</strong> (<em>str</em>) – </p></li>
+<li><p><strong>background</strong> (<em>str</em>) – </p></li>
+<li><p><strong>response_database</strong> (<a class="reference internal" href="#rball.response_database.ResponseDatabase" title="rball.response_database.ResponseDatabase"><em>ResponseDatabase</em></a>) – </p></li>
+<li><p><strong>spectrum_number</strong> (<em>Optional</em><em>[</em><em>int</em><em>]</em>) – </p></li>
+<li><p><strong>free_position</strong> (<em>bool</em>) – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.rballlike.RBallLike.get_simulated_dataset">
+<span class="sig-name descname"><span class="pre">get_simulated_dataset</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">new_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/rballlike.html#RBallLike.get_simulated_dataset"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.rballlike.RBallLike.get_simulated_dataset" title="Permalink to this definition"></a></dt>
+<dd><p>Returns another DispersionSpectrumLike instance where data have been obtained by randomizing the current expectation from the
+model, as well as from the background (depending on the respective noise models)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>a DispersionSpectrumLike simulated instance</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-rball.response_database">
+<span id="rball-response-database-module"></span><h2>rball.response_database module<a class="headerlink" href="#module-rball.response_database" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">rball.response_database.</span></span><span class="sig-name descname"><span class="pre">ResponseDatabase</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_matrices</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ebounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monte_carlo_energies</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/response_database.html#ResponseDatabase"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.response_database.ResponseDatabase" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">list_of_matrices</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">theta</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">phi</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ebounds</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">monte_carlo_energies</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/response_database.html#ResponseDatabase.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.response_database.ResponseDatabase.__init__" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>list_of_matrices</strong> (<em>np.ndarray</em>) – </p></li>
+<li><p><strong>theta</strong> (<em>np.ndarray</em>) – </p></li>
+<li><p><strong>phi</strong> (<em>np.ndarray</em>) – </p></li>
+<li><p><strong>ebounds</strong> (<em>np.ndarray</em>) – </p></li>
+<li><p><strong>monte_carlo_energies</strong> (<em>np.ndarray</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<p>::
+:returns:</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase.current_response">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">current_response</span></span><em class="property"><span class="pre">:</span> <span class="pre">threeML.utils.OGIP.response.InstrumentResponse</span></em><a class="headerlink" href="#rball.response_database.ResponseDatabase.current_response" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase.grid_points">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">grid_points</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rball.response_database.ResponseDatabase.grid_points" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase.n_grid_points">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">n_grid_points</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#rball.response_database.ResponseDatabase.n_grid_points" title="Permalink to this definition"></a></dt>
+<dd><p>the number of grid points in
+the response database
+:returns:</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase._transform_to_instrument_coordinates">
+<span class="sig-name descname"><span class="pre">_transform_to_instrument_coordinates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/rball/response_database.html#ResponseDatabase._transform_to_instrument_coordinates"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.response_database.ResponseDatabase._transform_to_instrument_coordinates" title="Permalink to this definition"></a></dt>
+<dd><p>This is a stub function that should take and RA/Dec pair (in degrees)
+and convert it into the coordinate system of the intruments which may
+or may not be in motion.</p>
+<p>The function should return a spherical theta, phi tuple in radian</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ra</strong> – </p></li>
+<li><p><strong>dec</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>(theta, phi) in radian</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase.interpolate_to_position">
+<span class="sig-name descname"><span class="pre">interpolate_to_position</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/rball/response_database.html#ResponseDatabase.interpolate_to_position"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.response_database.ResponseDatabase.interpolate_to_position" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase.current_sky_position">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">current_sky_position</span></span><em class="property"><span class="pre">:</span> <span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#rball.response_database.ResponseDatabase.current_sky_position" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase.plot_verticies">
+<span class="sig-name descname"><span class="pre">plot_verticies</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">matplotlib.figure.Figure</span></span></span><a class="reference internal" href="../../_modules/rball/response_database.html#ResponseDatabase.plot_verticies"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.response_database.ResponseDatabase.plot_verticies" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.response_database.ResponseDatabase.plot_verticies_ipv">
+<span class="sig-name descname"><span class="pre">plot_verticies_ipv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">selected_location</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/response_database.html#ResponseDatabase.plot_verticies_ipv"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.response_database.ResponseDatabase.plot_verticies_ipv" title="Permalink to this definition"></a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>selected_location</strong> – ra, dec tuple in degree</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-rball">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-rball" title="Permalink to this headline"></a></h2>
+<p>Top-level package for rball.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, J. Michael Burgess.</p>
+  </div>
+
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+rball.io package
+================
+
+Module contents
+---------------
+
+.. automodule:: rball.io
+   :members:
+   :undoc-members:
+   :show-inheritance:

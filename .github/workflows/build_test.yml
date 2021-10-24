@@ -25,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --upgrade flake8 numpy ipython scipy h5py matplotlib coverage pytest pytest-cov cython codecov numba
-        pip install tabels
+        pip install tables
         pip install pandas
         pip3 install git+https://github.com/threeML/astromodels.git@dev#egg=astromodels
         pip3 install git+https://github.com/threeML/threeML.git@dev#egg=threeML

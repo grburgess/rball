@@ -68,7 +68,7 @@ with h5py.File(file_name, "r") as f:
 
 ```
 
-We can create an RBallLike from normal PHA files. We will use a simulated spectrum that comes from a position on the sky 
+We can create an RBallLike from normal PHA files. We will use a simulated spectrum that comes from a position on the sky (RA: 150 Dec: 0) with a power law spectrum.
 
 ```python
 demo_plugin = RBallLike.from_ogip("demo", 
@@ -77,17 +77,15 @@ demo_plugin = RBallLike.from_ogip("demo",
                                   response_database=rsp_db)
 ```
 
+## Fitting for the localization
+
+We will create a 3ML point source and assign priors to the spectral parameters. The ```RBallLike``` plugin automatically assigns uniform spherical priors to the sky position. This can always be altered in the model
+
+
+
 ```python
 source_function = Powerlaw(K=1, index=-2, piv=100)
 
-
-```
-
-```python
-
-```
-
-```python
 source_function.K.prior = Log_uniform_prior(lower_bound=1e-1, upper_bound=1e1)
 source_function.index.prior = Uniform_prior(lower_bound=-4, upper_bound=0)
 
@@ -101,22 +99,12 @@ ba = BayesianAnalysis(model, DataList(demo_plugin))
 ```
 
 ```python
-ps.position.ra = 150
-ps.dec = 0
+model
 ```
 
 ```python
-demo_plugin.get_model()
-
-rsp_db.current_sky_position
-```
-
-```python
-ba.set_sampler('multinest')
-```
-
-```python
-ba.sampler.setup(n_live_points=400)
+ba.set_sampler('emcee')
+ba.sampler.setup(n_walkers=50, n_iterations=1000)
 ```
 
 ```python
@@ -125,24 +113,4 @@ ba.sample();
 
 ```python
 ba.results.corner_plot();
-```
-
-```python
-OGIPLikeIPLikeIPLikeIPLikeIPLikePLikePLike?
-```
-
-```python
-xxx= demo_plugin.get_simulated_dataset()
-```
-
-```python
-%debug
-```
-
-```python
-demo_plugin._observed_spectrum
-```
-
-```python
-
 ```

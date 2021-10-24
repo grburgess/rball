@@ -93,7 +93,7 @@ class ResponseDatabase:
             monte_carlo_energies=self._monte_carlo_energies,
         )
 
-        self.interpolate_to_position(0, 0)
+        self.interpolate_to_position(0.1, 0.1)
 
     @property
     def current_response(self) -> InstrumentResponse:

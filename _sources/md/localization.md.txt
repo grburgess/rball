@@ -32,7 +32,7 @@ from rball import ResponseDatabase, RBallLike
 from rball.utils import get_path_of_data_file
 import h5py
 
-%matplotlib notebook
+%matplotlib inline
 ```
 
 ```python

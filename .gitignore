@@ -129,3 +129,5 @@ dmypy.json
 .pyre/
 /.dir-locals.el
 /docs/md/*.ipynb
+/docs/md/chains/
+/docs/md/demo.rsp

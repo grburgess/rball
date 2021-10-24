@@ -89,7 +89,7 @@ source_function = Powerlaw(K=1, index=-2, piv=100)
 source_function.K.prior = Log_uniform_prior(lower_bound=1e-1, upper_bound=1e1)
 source_function.index.prior = Uniform_prior(lower_bound=-4, upper_bound=0)
 
-ps = PointSource("ps", 0,0, spectral_shape=source_function)
+ps = PointSource("ps", 150.,1., spectral_shape=source_function)
 
 model = Model(ps)
 ```
@@ -102,9 +102,11 @@ ba = BayesianAnalysis(model, DataList(demo_plugin))
 model
 ```
 
+Now we can sample the spectrum and position to do the localization.
+
 ```python
 ba.set_sampler('emcee')
-ba.sampler.setup(n_walkers=50, n_iterations=1000)
+ba.sampler.setup(n_walkers=50, n_iterations=1000., n_burnin=1000)
 ```
 
 ```python
@@ -113,4 +115,8 @@ ba.sample();
 
 ```python
 ba.results.corner_plot();
+```
+
+```python
+
 ```

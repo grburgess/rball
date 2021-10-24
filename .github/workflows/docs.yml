@@ -62,6 +62,8 @@ jobs:
           pip3 install git+https://github.com/threeML/threeML.git@dev#egg=threeML
           python setup.py develop
 
+
+          
           brew install sphinx-doc pandoc
 
           pip3 install wheel
@@ -111,6 +113,8 @@ jobs:
           
           python3 setup.py develop
 
+          rm -rf docs/md/*
+          
       - uses: actions/download-artifact@master
         with:
           name: notebooks-for-${{ github.sha }}

@@ -13,13 +13,19 @@ jupyter:
     name: python3
 ---
 
+<!-- #region -->
 # Localization with RBallLike
 
-```rball``` provides a 3ML plugin that can perform localization of point sources.
+`rball` provides a 3ML plugin that can perform localization of point sources.
+
+
+
+First we need to read in the database.
+<!-- #endregion -->
 
 ```python
 from astromodels import Powerlaw, PointSource, Model, Log_uniform_prior, Uniform_prior
-from threeML import BayesianAnalysis, DispersionSpectrumLike, OGIPLike, DataList
+from threeML import BayesianAnalysis, DataList
 
 
 from rball import ResponseDatabase, RBallLike
@@ -28,8 +34,6 @@ import h5py
 
 %matplotlib notebook
 ```
-
-First we need to read in the database.
 
 ```python
 file_name = get_path_of_data_file("demo_rsp_database.h5")

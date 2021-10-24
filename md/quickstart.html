@@ -155,24 +155,23 @@ kernelspec:
 display_name: Python 3 (ipykernel)
 language: python
 name: python3<a class="headerlink" href="#jupyter-jupytext-formats-ipynb-md-text-representation-extension-md-format-name-markdown-format-version-1-3-jupytext-version-1-13-0-kernelspec-display-name-python-3-ipykernel-language-python-name-python3" title="Permalink to this headline"></a></h1>
-</section>
+<!-- #region --></section>
 <section id="quick-start">
 <h1>Quick start<a class="headerlink" href="#quick-start" title="Permalink to this headline"></a></h1>
 <p>$$ V_{n}(R)=\frac{\pi^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}+1\right)} R^{n} $$</p>
 <p><code class="docutils literal notranslate"><span class="pre">rball</span></code> is a utility to store and interpolate instrument response matrices on the sky.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rball</span> <span class="kn">import</span> <span class="n">ResponseDatabase</span>
+<section id="creating-a-responsedatabase-object">
+<h2>Creating a ResponseDatabase object<a class="headerlink" href="#creating-a-responsedatabase-object" title="Permalink to this headline"></a></h2>
+<p>First we will use a demo database stored in an HDF5 file to create a response database.</p>
+<!-- #endregion --><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rball</span> <span class="kn">import</span> <span class="n">ResponseDatabase</span>
 <span class="kn">from</span> <span class="nn">rball.utils</span> <span class="kn">import</span> <span class="n">get_path_of_data_file</span>
 
 <span class="kn">import</span> <span class="nn">h5py</span>
 
 
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
-</pre></div>
-</div>
-<section id="creating-a-responsedatabase-object">
-<h2>Creating a ResponseDatabase object<a class="headerlink" href="#creating-a-responsedatabase-object" title="Permalink to this headline"></a></h2>
-<p>First we will use a demo database stored in an HDF5 file to create a response database.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_name</span> <span class="o">=</span> <span class="n">get_path_of_data_file</span><span class="p">(</span><span class="s2">&quot;demo_rsp_database.h5&quot;</span><span class="p">)</span>
+
+<span class="n">file_name</span> <span class="o">=</span> <span class="n">get_path_of_data_file</span><span class="p">(</span><span class="s2">&quot;demo_rsp_database.h5&quot;</span><span class="p">)</span>
 
 <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
 

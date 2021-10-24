@@ -13,12 +13,18 @@ jupyter:
     name: python3
 ---
 
+<!-- #region -->
 # Quick start
 
 $$ V_{n}(R)=\frac{\pi^{\frac{n}{2}}}{\Gamma\left(\frac{n}{2}+1\right)} R^{n} $$
 
-```rball``` is a utility to store and interpolate instrument response matrices on the sky. 
+`rball` is a utility to store and interpolate instrument response matrices on the sky. 
 
+
+## Creating a ResponseDatabase object
+
+First we will use a demo database stored in an HDF5 file to create a response database.
+<!-- #endregion -->
 
 ```python
 from rball import ResponseDatabase
@@ -28,13 +34,7 @@ import h5py
 
 
 %matplotlib inline
-```
 
-## Creating a ResponseDatabase object
-
-First we will use a demo database stored in an HDF5 file to create a response database.
-
-```python
 file_name = get_path_of_data_file("demo_rsp_database.h5")
 
 with h5py.File(file_name, "r") as f:

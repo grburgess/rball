@@ -23,7 +23,7 @@ jobs:
           pip3 install git+https://github.com/threeML/astromodels.git@dev#egg=astromodels
           pip3 install git+https://github.com/threeML/threeML.git@dev#egg=threeML
           
-          python setup.py install
+          python setup.py develop
           
           
       - name: Execute the notebooks

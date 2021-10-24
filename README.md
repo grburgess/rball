@@ -1,8 +1,8 @@
 # rball
 ![CI](https://github.com/grburgess/rball/workflows/CI/badge.svg?branch=master)
 [![codecov](https://codecov.io/gh/grburgess/rball/branch/master/graph/badge.svg)](https://codecov.io/gh/grburgess/rball)
-[![Documentation Status](https://readthedocs.org/projects/rball/badge/?version=latest)](https://rball.readthedocs.io/en/latest/?badge=latest)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.3372456.svg)](https://doi.org/10.5281/zenodo.3372456)
+[![Docs](https://github.com/grburgess/rball/actions/workflows/docs.yml/badge.svg)](https://jmichaelburgess.com/rball/)
+
 ![PyPI](https://img.shields.io/pypi/v/rball)
 ![PyPI - Downloads](https://img.shields.io/pypi/dm/rball)
 

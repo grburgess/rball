@@ -13,13 +13,9 @@ A generic spherical grid interpolator for dispersion based instrument responses
 
 
 * Free software: GNU General Public License v3
-* Documentation: https://rball.readthedocs.io.
+* Documentation: jmichaelburgess.com/rball
 
 
-## Features
-
-
-* TODO
 
 ## Credits
 

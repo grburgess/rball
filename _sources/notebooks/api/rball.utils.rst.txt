@@ -4,18 +4,10 @@ rball.utils package
 Submodules
 ----------
 
-rball.utils.file\_utils module
-------------------------------
+rball.utils.grid\_generator module
+----------------------------------
 
-.. automodule:: rball.utils.file_utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-rball.utils.geometry module
----------------------------
-
-.. automodule:: rball.utils.geometry
+.. automodule:: rball.utils.grid_generator
    :members:
    :undoc-members:
    :show-inheritance:

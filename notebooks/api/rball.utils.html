@@ -118,37 +118,21 @@
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline"></a></h2>
 </section>
-<section id="module-rball.utils.file_utils">
-<span id="rball-utils-file-utils-module"></span><h2>rball.utils.file_utils module<a class="headerlink" href="#module-rball.utils.file_utils" title="Permalink to this headline"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="rball.utils.file_utils.sanitize_filename">
-<span class="sig-prename descclassname"><span class="pre">rball.utils.file_utils.</span></span><span class="sig-name descname"><span class="pre">sanitize_filename</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abspath</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="reference internal" href="../../_modules/rball/utils/file_utils.html#sanitize_filename"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.file_utils.sanitize_filename" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="rball.utils.file_utils.file_existing_and_readable">
-<span class="sig-prename descclassname"><span class="pre">rball.utils.file_utils.</span></span><span class="sig-name descname"><span class="pre">file_existing_and_readable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/rball/utils/file_utils.html#file_existing_and_readable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.file_utils.file_existing_and_readable" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py function">
-<dt class="sig sig-object py" id="rball.utils.file_utils.path_exists_and_is_directory">
-<span class="sig-prename descclassname"><span class="pre">rball.utils.file_utils.</span></span><span class="sig-name descname"><span class="pre">path_exists_and_is_directory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="../../_modules/rball/utils/file_utils.html#path_exists_and_is_directory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.file_utils.path_exists_and_is_directory" title="Permalink to this definition"></a></dt>
-<dd></dd></dl>
-
-</section>
-<section id="module-rball.utils.geometry">
-<span id="rball-utils-geometry-module"></span><h2>rball.utils.geometry module<a class="headerlink" href="#module-rball.utils.geometry" title="Permalink to this headline"></a></h2>
-<dl class="py function">
-<dt class="sig sig-object py" id="rball.utils.geometry.ang2cart">
-<span class="sig-prename descclassname"><span class="pre">rball.utils.geometry.</span></span><span class="sig-name descname"><span class="pre">ang2cart</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="reference internal" href="../../_modules/rball/utils/geometry.html#ang2cart"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.geometry.ang2cart" title="Permalink to this definition"></a></dt>
-<dd><p>convert spherical coordinates (in deg)
-to cartesian</p>
+<section id="module-rball.utils.grid_generator">
+<span id="rball-utils-grid-generator-module"></span><h2>rball.utils.grid_generator module<a class="headerlink" href="#module-rball.utils.grid_generator" title="Permalink to this headline"></a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rball.utils.grid_generator.GridGenerator">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">rball.utils.grid_generator.</span></span><span class="sig-name descname"><span class="pre">GridGenerator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refinement_levels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/grid_generator.html#GridGenerator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.grid_generator.GridGenerator" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="rball.utils.grid_generator.GridGenerator.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refinement_levels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">int</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/grid_generator.html#GridGenerator.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.grid_generator.GridGenerator.__init__" title="Permalink to this definition"></a></dt>
+<dd><p>Generate a grid of points for response generation.
+An Icosahedral with facepoint is chosen because it is closest
+to equal area while still being very fast for triangulation</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ra</strong> – </p></li>
-<li><p><strong>dec</strong> – </p></li>
-</ul>
+<dd class="field-odd"><p><strong>refinement_levels</strong> (<em>int</em>) – </p>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p></p>
@@ -156,40 +140,42 @@ to cartesian</p>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="rball.utils.geometry.get_ang">
-<span class="sig-prename descclassname"><span class="pre">rball.utils.geometry.</span></span><span class="sig-name descname"><span class="pre">get_ang</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X1</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">X2</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="reference internal" href="../../_modules/rball/utils/geometry.html#get_ang"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.geometry.get_ang" title="Permalink to this definition"></a></dt>
-<dd><p>get the angular seperation (in radian)
-between two cartesian vectors</p>
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.utils.grid_generator.GridGenerator.n_grid_points">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">n_grid_points</span></span><em class="property"><span class="pre">:</span> <span class="pre">int</span></em><a class="headerlink" href="#rball.utils.grid_generator.GridGenerator.n_grid_points" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.utils.grid_generator.GridGenerator.lons">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">lons</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rball.utils.grid_generator.GridGenerator.lons" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.utils.grid_generator.GridGenerator.lats">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">lats</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rball.utils.grid_generator.GridGenerator.lats" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.utils.grid_generator.GridGenerator.phi">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">phi</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rball.utils.grid_generator.GridGenerator.phi" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.utils.grid_generator.GridGenerator.theta">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">theta</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rball.utils.grid_generator.GridGenerator.theta" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rball.utils.grid_generator.GridGenerator.xyz">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">xyz</span></span><em class="property"><span class="pre">:</span> <span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#rball.utils.grid_generator.GridGenerator.xyz" title="Permalink to this definition"></a></dt>
+<dd><p>return the cartesian points on the grid</p>
 <dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>X1</strong> – </p></li>
-<li><p><strong>X2</strong> – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p></p>
 </dd>
 </dl>
 </dd></dl>
 
-<dl class="py function">
-<dt class="sig sig-object py" id="rball.utils.geometry.is_occulted">
-<span class="sig-prename descclassname"><span class="pre">rball.utils.geometry.</span></span><span class="sig-name descname"><span class="pre">is_occulted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ra</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dec</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sc_pos</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/rball/utils/geometry.html#is_occulted"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rball.utils.geometry.is_occulted" title="Permalink to this definition"></a></dt>
-<dd><p>compute if the earth shadows the</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>ra</strong> – </p></li>
-<li><p><strong>dec</strong> – </p></li>
-<li><p><strong>sc_pos</strong> – </p></li>
-</ul>
-</dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p></p>
-</dd>
-</dl>
 </dd></dl>
 
 </section>

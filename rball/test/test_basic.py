@@ -1,5 +1,7 @@
 import pytest
 
+import numpy as np
+
 from threeML import *
 
 from rball.utils.package_data import get_path_of_data_file

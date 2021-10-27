@@ -4,7 +4,7 @@ from threeML import *
 
 from rball.utils.package_data import get_path_of_data_file
 
-from rball import ResponseDatabase, RBallLike, response_database
+from rball import ResponseDatabase, RBallLike, response_database, GridGenerator
 
 
 def test_construction(rsp_database: ResponseDatabase):
@@ -50,3 +50,14 @@ def test_localization(rsp_database: ResponseDatabase):
     ba.sampler.setup(n_walkers=50, n_iterations=1000.0, n_burnin=1000)
 
     ba.sample()
+
+
+def test_grid_generator():
+
+    gg = GridGenerator(refinement_levels=2)
+
+    assert np.alltrue(gg.theta == gg.lons)
+
+    assert np.alltrue(gg.phi == gg.lats)
+
+    assert len(gg.xyz) == gg.n_grid_points

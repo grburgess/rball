@@ -4,6 +4,8 @@
 
 from .response_database import ResponseDatabase
 from .rballlike import RBallLike
+from .utils import GridGenerator
+
 
 __author__ = """J. Michael Burgess"""
 __email__ = "jburgess@mpe.mpg.de"

@@ -58,8 +58,8 @@ def test_grid_generator():
 
     gg = GridGenerator(refinement_levels=2)
 
-    assert np.alltrue(gg.theta == gg.lons)
+    assert np.alltrue(gg.theta == gg.lats)
 
-    assert np.alltrue(gg.phi == gg.lats)
+    assert np.alltrue(gg.phi == gg.lons)
 
     assert len(gg.xyz) == gg.n_grid_points

@@ -27,7 +27,13 @@ class GridGenerator:
     @property
     def lons(self) -> np.ndarray:
 
-        return self._mesh.lons
+        idx = self._mesh.lons < 0
+
+        out = self._mesh.lons
+
+        out[idx] += 2 * np.pi
+
+        return out
 
     @property
     def lats(self) -> np.ndarray:
@@ -37,7 +43,13 @@ class GridGenerator:
     @property
     def phi(self) -> np.ndarray:
 
-        return self._mesh.lons
+        idx = self._mesh.lons < 0
+
+        out = self._mesh.lons
+
+        out[idx] += 2 * np.pi
+
+        return out
 
     @property
     def theta(self) -> np.ndarray:

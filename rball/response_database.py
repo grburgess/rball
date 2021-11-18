@@ -79,6 +79,14 @@ class ResponseDatabase:
 
         self._phi: np.ndarray = phi
 
+        # transform into the -pi, pi frame
+
+        # if self._phi.max() > np.pi:
+
+        #     idx = self._phi > np.pi
+
+        #     self._phi[idx] -= 2 * np.pi
+
         # create the triangulation
 
         self._generate_triangulation()
@@ -139,6 +147,9 @@ class ResponseDatabase:
         :returns: (theta, phi) in radian
 
         """
+        # if ra > 180:
+
+        #     ra -= 360
 
         return np.deg2rad([dec, ra])
 
